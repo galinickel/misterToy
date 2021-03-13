@@ -17,7 +17,7 @@
     name: 'home',
     computed: {
       toys() {
-        return this.$store.getters.products;
+        return this.$store.getters.toys;
       }
     },
     components: {

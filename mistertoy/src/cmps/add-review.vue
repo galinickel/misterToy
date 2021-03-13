@@ -2,7 +2,7 @@
     <section v-if="loggedinUser" class="toy-review">
         <h2>Write a review about: <h1 class="capitalize">{{toy.name}}</h1>
         </h2>
-        <form @submit.prevent="submitReview">
+        <form >
             <p for="full-name">Full Name: {{loggedinUser.fullname}} </p>
             <label for="review-text">Review: </label>
             <textarea rows="12" id="review-text" placeholder="place your review" type="text"
@@ -17,7 +17,7 @@
                     <span class="star star-5 fa fa-star" @click="updateStarCount(5)"></span>
                 </ol>
             </span>
-            <button>Submit</button>
+            <el-button @click="submitReview">Submit</el-button>
         </form>
     </section>
 </template>
@@ -51,7 +51,7 @@
                 this.review.user = this.loggedinUser
                 this.toy.reviews.push(this.review)
                 toyService.save(this.toy)
-                console.log(this.toy);
+                this.$router.push('/app')
             }
         },
         computed: {

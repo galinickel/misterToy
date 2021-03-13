@@ -8,12 +8,12 @@ Vue.use(Vuex)
 
 export const toyStore = ({
   state: {
-    products: [],
+    toys: [],
     filterBy: {}
   },
   getters: {
-    products(state) {
-      return state.products
+    toys(state) {
+      return state.toys
     },
   },
   mutations: {
@@ -23,26 +23,26 @@ export const toyStore = ({
       state.isLoading = isLoading;
     },
     setProducts(state, {
-      products
+      toys
     }) {
-      state.products = products;
+      state.toys = toys;
     },
     removeProduct(state, {
       productId
     }) {
-      const idx = state.products.findIndex(p => p._id === productId)
-      state.products.splice(idx, 1)
+      const idx = state.toys.findIndex(p => p._id === productId)
+      state.toys.splice(idx, 1)
     },
     addProduct(state, {
-      product
+      toy
     }) {
-      state.products.push(product);
+      state.toys.push(toy);
     },
     updateProduct(state, {
-      product
+      toy
     }) {
-      const idx = state.products.findIndex(p => p._id === product._id)
-      state.products.splice(idx, 1, product);
+      const idx = state.toys.findIndex(p => p._id === toy._id)
+      state.toys.splice(idx, 1, toy);
     },
     setFilter(state, payload) {
       const filter = payload.payload
@@ -59,16 +59,16 @@ export const toyStore = ({
         isLoading: true
       });
       toyService.query()
-        .then(products => {
+        .then(toys => {
 
           commit({
             type: 'setProducts',
-            products
+            toys
           });
         })
         .catch(err => {
-          console.log('Store: Cannot load products', err);
-          throw new Error('Cannot load products');
+          console.log('Store: Cannot load toys', err);
+          throw new Error('Cannot load toys');
         })
         .finally(() => {
           commit({
@@ -85,26 +85,26 @@ export const toyStore = ({
           commit(payload)
         })
         .catch(err => {
-          console.log('Store: Cannot remove product', err);
-          throw new Error('Cannot remove product');
+          console.log('Store: Cannot remove toy', err);
+          throw new Error('Cannot remove toy');
         })
     },
     saveProduct({
       commit
     }, {
-      product
+      toy
     }) {
-      const type = (product._id) ? 'updateProduct' : 'addProduct';
-      return toyService.save(product)
+      const type = (toy._id) ? 'updateProduct' : 'addProduct';
+      return toyService.save(toy)
         .then(savedProduct => {
           commit({
             type,
-            product: savedProduct
+            toy: savedProduct
           })
         })
         .catch(err => {
-          console.log('Store: Cannot save product', err);
-          throw new Error('Cannot save product');
+          console.log('Store: Cannot save toy', err);
+          throw new Error('Cannot save toy');
         })
 
     },

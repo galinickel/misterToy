@@ -1,11 +1,14 @@
 <template>
   <div>
-    <h3>{{product.name}}</h3>
-    <p>Category: {{product.type}}</p>
-    <p>Price: {{product.price}}</p>
-    <el-button @click="removeProduct(product._id)">x</el-button>
-    <router-link :to="'/toy/details/'+product._id">Details</router-link>
-    <el-button @click="editProduct(product)">Edit</el-button>
+    <h3>{{toy.name}}</h3>
+    <p>Category: {{toy.type}}</p>
+    <p>Price: {{toy.price}}</p>
+    <p>In Stock: {{toy.inStock}}</p>
+    <router-link :to="'/toy/details/'+toy._id">Details</router-link>
+    <div v-if="isUserAdmin">
+    <el-button @click="removeProduct(toy._id)">x</el-button>
+    <el-button @click="editProduct(toy)">Edit</el-button>
+    </div>
   </div>
 </template>
 
@@ -13,7 +16,7 @@
   export default {
     name: 'toyPreview',
     props: {
-      product: Object
+      toy: Object
     },
     methods: {
       removeProduct(productId) {
@@ -23,19 +26,21 @@
             productId
           })
           .then(() => {
-            console.log('product removed');
-            // showMsg('Product removed')
+            console.log('toy removed');
           })
           .catch(err => {
-            console.log('product failed to remove');
-            // showMsg('Cannot remove product', 'danger')
+            console.log('toy failed to remove');
           })
       },
-      editProduct(product) {
-        this.$emit('clickedEdit',product)
+      editProduct(toy) {
+        this.$emit('clickedEdit', toy)
       }
     },
-    computed: {},
+    computed: {
+      isUserAdmin() {
+        return this.$store.getters.user?.isAdmin || false
+      }
+    },
     created() {}
   }
 </script>

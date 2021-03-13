@@ -2,8 +2,8 @@
   <div class="home">
     <h1>Toy Store</h1>
     <toyFilter @filterSet="setFilteredProducts" />
-    <toyList :msg="'This is toy list'" :products="products" @editProduct="editToy" />
-    <toyEdit :product="productToEdit" @getEmptyProduct="getEmptyProduct" />
+    <toyList :msg="'This is toy list'" :toys="toys" @editProduct="editToy" />
+    <toyEdit :toy="productToEdit" @getEmptyProduct="getEmptyProduct" />
   </div>
 </template>
 
@@ -14,6 +14,7 @@
   import toyList from '../cmps/toy-list.vue'
   import toyEdit from '../cmps/toy-edit.vue'
   import toyFilter from '../cmps/toy-filter.vue'
+  
 
   export default {
     name: 'app',
@@ -28,9 +29,9 @@
           type: 'loadProducts'
         })
       },
-      editToy(product) {
+      editToy(toy) {
         this.productToEdit = {
-          ...product
+          ...toy
         }
       },
       getEmptyProduct() {
@@ -42,8 +43,8 @@
       }
     },
     computed: {
-      products() {
-        return this.$store.getters.products
+      toys() {
+        return this.$store.getters.toys
       },
     },
     created() {

@@ -1,24 +1,27 @@
 <template>
   <div>
-    <h3 v-if="product.name !== ''">Edit Product</h3>
-    <h3 v-else>Add Product</h3>
+    <h3 v-if="toy._id !== ''">Edit Toy</h3>
+    <h3 v-else>Add Toy</h3>
     <form @submit.prevent="saveProduct">
-      <el-input style="width:25%" type="text" placeholder="Name" v-model="product.name" />
-      <el-input style="width:10%" type="number" placeholder="Price" v-model.number="product.price" />
+      <el-input style="width:25%" type="text" placeholder="Name" v-model="toy.name" />
+      <el-input style="width:10%" type="number" placeholder="Price" v-model.number="toy.price" />
       <label>
-        <input type="radio" v-model="product.type" value="Family Friendly" /> Family Friendly
+        <input type="radio" v-model="toy.type" value="Family Friendly" /> Family Friendly
       </label>
       <label>
-        <input type="radio" v-model="product.type" value="Sporty" /> Sporty
+        <input type="radio" v-model="toy.type" value="Sporty" /> Sporty
       </label>
       <label>
-        <input type="radio" v-model="product.type" value="Science" /> Science
+        <input type="radio" v-model="toy.type" value="Science" /> Science
       </label>
       <label>
-        <input type="radio" v-model="product.type" value="Outdoors" /> Outdoors
+        <input type="radio" v-model="toy.type" value="Outdoors" /> Outdoors
       </label>
       <label>
-        <input type="radio" v-model="product.type" value="Funny" /> Funny
+        <input type="radio" v-model="toy.type" value="Funny" /> Funny
+      </label>
+       <label>
+        <input type="checkbox" v-model="toy.inStock"/> In Stock
       </label>
       <el-button @click="saveProduct">Save</el-button>
     </form>
@@ -32,17 +35,17 @@ import toyService from "../services/toy-service.js"
     
     name: 'toyPreview',
     props: {
-      product: Object
+      toy: Object
     },
     data(){
       return{}
     },
     methods: {
       saveProduct() {
-        console.log('Saving...', this.product);
+        console.log('Saving...', this.toy);
         this.$store.dispatch({
             type: 'saveProduct',
-            product: this.product
+            toy: this.toy
           })
           .then(() => {
             this.clearProduct()
@@ -52,7 +55,7 @@ import toyService from "../services/toy-service.js"
         this.$emit('getEmptyProduct')
       },
       setProductToEdit(){
-        this.setProductToEdit = this.product
+        this.setProductToEdit = this.toy
       }
     },
     computed: {},

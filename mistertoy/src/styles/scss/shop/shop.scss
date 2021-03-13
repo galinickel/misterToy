@@ -7,9 +7,7 @@
     grid-template-columns: repeat(3,1fr);
 }
 
-.toy-list li {
-    margin: 0 10px;
-}
+
 
 .toy-review {
     height: 100%;
@@ -42,11 +40,6 @@
 .toy-review form label{
     display: flex;
     align-items: flex-start;
-}
-
-.toy-review button {
-    background-color: #2ECC71;
-    color: white;
 }
 
 textarea {

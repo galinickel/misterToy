@@ -1,5 +1,31 @@
-// @font-face { 
-//     font-family: Ubuntu; 
-//     src: @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
-// }
+.review-item {
+    border: 2px solid darkgray;
+    padding: 5%;
+    border-radius: 5px;
+}
 
+.toy-details {
+    display: flex;
+}
+
+    .details-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+    }
+.review-list { 
+        margin: 0 auto;
+        list-style-type: none;
+        padding: 0;
+        display: grid;
+    
+    
+}
+    .toy-review {
+        padding: 0 20%;
+    }
+    .review-item { 
+        width: 400px;
+        margin: 5% auto;
+    }

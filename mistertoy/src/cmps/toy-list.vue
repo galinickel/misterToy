@@ -2,8 +2,8 @@
   <div class="hello">
     <div>
       <ul class="toy-list">
-        <li v-for="product in products" v-bind:key="product._id">
-          <toy-preview :product="product" @clickedEdit="prepareEdit(product)" />
+        <li v-for="toy in toys" v-bind:key="toy._id">
+          <toy-preview :toy="toy" @clickedEdit="prepareEdit(toy)" />
         </li>
       </ul>
     </div>
@@ -13,23 +13,21 @@
   import toyPreview from "../cmps/toy-preview.vue"
   export default {
     name: 'toyList',
-    props: {},
     methods: {
-      editProduct(product) {
-        console.log(product._id);
+      editProduct(toy) {
+        console.log(toy._id);
       },
-      prepareEdit(product) {
-        this.$emit('editProduct', product)
+      prepareEdit(toy) {
+        this.$emit('editProduct', toy)
       }
     },
     computed: {
-      products() {
-        return this.$store.getters.products
+      toys() {
+        return this.$store.getters.toys
       },
       isLoading() {
         return this.$store.getters.isLoading
       },
-
     },
     components: {
       toyPreview

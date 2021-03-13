@@ -1,18 +1,19 @@
 <template>
-    <section v-if="toy">
+    <section class="toy-details" v-if="toy">
+        <div  class="details-container">
         <router-link to="/app">Back to Toys</router-link>
         <h3>Toy Name: {{toy.name}}</h3>
         <p>Toy Type: {{toy.type}}</p>
-        <p>Created at: {{toy.createdAt}}</p>
         <p>In Stock: {{isInStock}}</p>
-        <ul class="toy-list">
-            <li v-for="(review,idx) in toy.reviews" :key="idx">
+        <ul class="review-list">
+            <li v-for="(review,idx) in toy.reviews" :key="idx" class="review-item">
                 <p>By: {{review.user.fullname}}</p>
-                <p>Rating: {{review.starCount}}</p>
+                <p>Rating: {{showStars(review.starCount)}}</p>
                 <p>"{{review.txt}}"</p>
-                <el-button v-if="isUserAdmin" @click="removeReview(idx)"> X</el-button>
+                <span v-if="isUserAdmin" @click="removeReview(idx)"> X</span>
             </li>
         </ul>
+        </div>
         <addReview :toy="toy"></addReview>
     </section>
 </template>
@@ -49,11 +50,14 @@
                 })
         },
         methods: {
-removeReview(idx) { 
-    console.log('removing', this.toy.reviews[idx]);
-    this.toy.reviews.splice(idx,1)
-    toyService.save(this.toy)
-}
+            removeReview(idx) {
+                console.log('removing', this.toy.reviews[idx]);
+                this.toy.reviews.splice(idx, 1)
+                toyService.save(this.toy)
+            },
+            showStars(num) { 
+                return '⭐'.repeat(num)
+            }
         },
         components: {
             addReview

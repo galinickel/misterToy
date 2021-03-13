@@ -1,21 +1,12 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <h1>Mister Toy</h1>
-      <ul>
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-        <router-link to="/app">Store</router-link>
-        <router-link to="/login">Log In</router-link>
-      </ul>
-      <section>
-        Hello, {{user.fullname}}
-      </section>
-    </div>
+    <appHeader/>
     <router-view />
   </div>
 </template>
 <script>
+  import appHeader from './cmps/app-header.vue'
+ 
   export default {
     created() {
       this.$store.dispatch({
@@ -24,17 +15,11 @@
     },
     data() {
       return {
-        toys: this.$store.getters.products
+        toys: this.$store.getters.toys
       }
     },
-    computed: {
-      user() {
-        return this.$store.getters.user || {
-          fullname: 'You are currently not logged in.',
-        }
-      }
-, created() { 
-}
+    components: { 
+      appHeader
     }
   }
 </script>

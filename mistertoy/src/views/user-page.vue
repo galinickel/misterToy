@@ -1,23 +1,24 @@
 <template>
     <section v-if="loggedinUser">
-        Hello Master {{loggedinUser.fullname}}
-        <button @click="logout">Logout</button>
+        Hello, {{loggedinUser.fullname}}!
+        <p v-if="loggedinUser.isAdmin">As admin, you have the authority to modify toys, remove toys and even remove reviews. Use your power responsibly!</p>
+        <el-button @click="logout">Logout</el-button>
     </section>
     <section v-else>
         <hr />
-        <form @submit.prevent="login">
+        <form >
             <h2>Login</h2>
             <input type="text" placeholder="Your username" v-model="credentials.username" />
             <input type="password" v-model="credentials.password" />
-            <button>Login</button>
+            <el-button @click="login">Login</el-button>
         </form>
         <hr />
-        <form @submit.prevent="signup">
+        <form>
             <h2>Signup</h2>
             <input type="text" placeholder="Your fullname" v-model="signupCredentials.fullname" />
             <input type="text" placeholder="Your username" v-model="signupCredentials.username" />
             <input type="password" v-model="signupCredentials.password" />
-            <button>Login</button>
+            <el-button @click="signup">Login</el-button>
         </form>
 
     </section>
