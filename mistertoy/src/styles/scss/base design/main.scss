@@ -1,0 +1,32 @@
+#nav { 
+background-color: #F6C8CC;
+display: flex;
+padding: 30px;
+justify-content: space-between;
+color: #C15B78;
+
+ul { 
+    width: 25%;
+    *{
+        margin: 0 5%;
+        color: #f87979;
+
+    }
+}
+}
+
+#nav a.router-link-exact-active {
+    color: #fff;
+}
+
+#app { 
+    background-color: #EBF5F7;
+    min-height: 98vh;
+p{
+    color: #488b92;
+
+}
+    p{
+        color: #806f74;
+    }
+}

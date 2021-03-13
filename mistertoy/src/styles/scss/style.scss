@@ -1,0 +1,18 @@
+//OLD CSS
+@import 'base design/old';
+@import 'base design/main';
+
+
+//PAGES
+@import 'pages/home';
+@import 'pages/about';
+
+//SHOP
+@import 'shop/shop';
+@import 'shop/elements';
+
+
+
+body { 
+    font-family: 'Ubuntu';
+}
