@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {
-  toyService
-} from "../services/toy-service.js"
+import {toyService} from "../services/toy-service.js"
+import {reviewService} from "../services/review.service.js"
 
 Vue.use(Vuex)
 
@@ -51,16 +50,13 @@ export const toyStore = ({
     }
   },
   actions: {
-    loadProducts({
-      commit
-    }) {
+    loadProducts({ commit }) {
       commit({
         type: 'setIsLoading',
         isLoading: true
       });
       toyService.query()
         .then(toys => {
-
           commit({
             type: 'setProducts',
             toys
@@ -75,8 +71,11 @@ export const toyStore = ({
             type: 'setIsLoading',
             isLoading: false
           });
-        })
-    },
+        })},
+        addReview(context, {review}) {
+          reviewService.save(review)
+        }
+    ,
     removeProduct({
       commit
     }, payload) {

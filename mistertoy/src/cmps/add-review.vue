@@ -2,7 +2,7 @@
     <section v-if="loggedinUser" class="toy-review">
         <h2>Write a review about: <h1 class="capitalize">{{toy.name}}</h1>
         </h2>
-        <form >
+        <form>
             <p for="full-name">Full Name: {{loggedinUser.fullname}} </p>
             <label for="review-text">Review: </label>
             <textarea rows="12" id="review-text" placeholder="place your review" type="text"
@@ -23,9 +23,8 @@
 </template>
 
 <script>
-    import {
-        toyService
-    } from '../services/toy-service';
+    import {reviewService} from '../services/review.service';
+
     export default {
         name: 'toyReview',
         props: ['toy'],
@@ -47,11 +46,21 @@
                     document.querySelector(`.star-${i}`).classList.add('selected')
                 }
             },
-            submitReview() {
-                this.review.user = this.loggedinUser
-                this.toy.reviews.push(this.review)
-                toyService.save(this.toy)
-                this.$router.push('/app')
+            // submitReview() {
+            //     this.review.user = this.loggedinUser
+            //     this.toy.reviews.push(this.review)
+            //     toyService.save(this.toy)
+            //     this.$router.push('/app')
+            // },
+            async submitReview() {
+                this.review.byUserId = this.loggedinUser._id
+                this.review.aboutToyId = this.toy._id
+                try {
+                    await this.$store.dispatch({type:"addReview",review:this.review})
+                    this.review = reviewService.getEmptyReview()
+                } catch (err) {
+                    console.log('failure');
+                }
             }
         },
         computed: {

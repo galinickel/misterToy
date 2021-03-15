@@ -5,6 +5,7 @@ import about from '../views/about.vue'
 import toyApp from '../views/toy-app.vue'
 import userPage from '../views/user-page.vue'
 import toyDetails from '../views/toy-details.vue'
+import userPanel from '../views/user-panel.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,10 @@ const routes = [{
     path: '/about',
     name: 'about',
     component: about
+  }, {
+    path: '/user',
+    name: 'user-panel',
+    component: userPanel
   },
   {
     path: '/login',
@@ -26,9 +31,10 @@ const routes = [{
     path: '/app',
     name: 'toy-app',
     component: toyApp
-  },
-  {path: '/toy/details/:toyId',
-component: toyDetails}
+  }, {
+    path: '/toy/details/:toyId',
+    component: toyDetails
+  }
 ]
 
 const router = new VueRouter({

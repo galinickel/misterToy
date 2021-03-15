@@ -8,6 +8,7 @@
             <router-link to="/">Home</router-link>
             <router-link to="/about">About</router-link>
             <router-link to="/app">Store</router-link>
+            <router-link to="/user" v-if="user.fullname !== 'You are currently not logged in.'">My Reviews</router-link>
             <router-link to="/login">Log In</router-link>
         </ul>
 
